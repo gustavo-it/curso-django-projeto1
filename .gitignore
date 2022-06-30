@@ -134,3 +134,7 @@ gunicorn-error-log
 db.sqlite3
 db copy.sqlite3
 static/
+
+#Chaves SSH
+nti-05
+nti-05.pub
