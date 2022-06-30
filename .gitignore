@@ -136,5 +136,5 @@ db copy.sqlite3
 static/
 
 #Chaves SSH
-nti-05
-nti-05.pub
+nti05
+nti05.pub
