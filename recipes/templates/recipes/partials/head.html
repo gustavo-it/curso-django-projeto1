@@ -160,5 +160,18 @@
             color: var(--color-primary);
             /* Enquanto o elemento estiver em foco vamos estiliza-lo */ 
         }
+
+        .main-content {
+            padding-top: 0;
+        }
+
+        .main-content-list {
+            display: grid;
+            /* Utilizando o grid  */
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            /* Para ficar responsivo, vamos definir o número total de colunas que serão criadas no grid, definindo o tamanho mínimo que é 340 pixels e caso não seja possível esse tamanho, que pega o elemento todo. auto-fit -> ajusta automaticamente as colunas. */
+            gap: var(--spacing-gutter-large);
+            /* Adicionando um espaço entre as colunas/elementos. */ 
+        }
     </style>
 </head>
