@@ -1,20 +1,14 @@
 {% include 'recipes/partials/head.html' %}
+
 <body>
-    <header class="main-header-container">
-        <div class="main-header container">
-            {% comment %} Estou criando o container em header, que vai ocupar a página toda e 
-            criando uma div-container que irá ocupar uma parte da div header.
-            {% endcomment %}
-            <h1>
-                <a href="/" class="main-logo">
-                    {% comment %} a tag <a> vai levar a pessoa a home quando clicar
-                    {% endcomment %}
-                    <i class="fas fa-utensils main-logo-icon"></i> 
-                    <span class="main-logo-text">Recipes</span>
-                </a>
-            </h1>
+    {% include 'recipes/partials/header.html' %}
+    <div class="search-container">
+        <div class="container">
+           <form action="" class="search-form">
+                <input type="search" class="search-input" name="search">
+                <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+           </form> 
         </div>
-    </header>
-    
+    </div>
 </body>
 </html>
