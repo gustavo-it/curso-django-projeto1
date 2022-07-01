@@ -56,6 +56,7 @@
             --spacing-gutter-large: 4rem;
         }
         * {
+            /* Zerando todo o html (tirando margens e coisas do tipo) */
             padding: 0;
             margin: 0;
             box-sizing: border-box;
@@ -67,24 +68,26 @@
 
         body{
             font-size: 1.6rem;
-            
-        }
-
-        h1,h2,h3,h4,h5,h6 {
-            font-family: var(--font-headings);
         }
 
         /* Em nosso body teremos 16px de font com a conversão que fizemos. */
 
+        h1,h2,h3,h4,h5,h6 {
+            font-family: var(--font-headings);
+            /* Definindo fontes para nossos títulos principais */
+        }
+
         .main-header-container {
             background: var(--color-primary-dark);
             font-family: var(--font-primary);
+            /* Definindo a cor e a fonte do nosso cabeçalho */
         }
 
         .container {
             max-width: 144rem; /* 1440 pixels */
             margin: 0 auto; /* Margin do topo e para baixo = 0, lados = auto */
             padding: var(--spacing-gutter-medium);
+            /* Definindo largura, margem e margem interna da class container */
         }
 
         .main-logo {
@@ -97,10 +100,12 @@
             justify-content: center;
             width: fit-content; /* Com isso quero dizer que o tamanho vai ser igual ao tamanho do conteúdo */
             margin: 0 auto;
+            /* Estilizando o que está dentro da tag <a> */
         }
 
         .main-logo-icon {
             margin-right: 2rem;
+            /* Definindo uma margem para o ícone */
         }
     </style>
 </head>
