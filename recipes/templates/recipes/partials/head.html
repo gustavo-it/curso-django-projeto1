@@ -199,6 +199,12 @@
             /* scale redimensiona um elemento, com o valor 1, ele deixa do mesmo tamanho*/
             transition: all 300ms ease-in-out;
             /* Adicionando efeito de transição, como já vimos anteriormente */
+            border-radius: .4rem;
+            /* Adicionando borda arredondada */
+            overflow: hidden;
+            /* overflow -> Indica que o conteúdo de um elemento deve ser cortado 
+               hidden -> Torna o texto visível
+            */
         }
 
         .recipe img {
@@ -256,6 +262,51 @@
         .recipe-author a:hover {
             /* estilizando a tag <a> que está dentro dessa div */
             color: var(--color-primary-dark);
+        }
+
+        .recipe-meta-container {
+            display: flex;
+            flex-flow: row wrap;
+            /* Se não couber, joga um dos elementos para baixo */
+            padding: var(--spacing-gutter-medium);
+            /* Espaçamento entre os elementos */
+            background: var(--color-gray-1);
+            /* Deixando os dois elementos lado a lado */
+        }
+
+        .recipe-meta {
+            display: flex;
+            /* div dentro do nosso container */
+            flex-flow: column nowrap;
+            /*  */
+            flex-shrink: 1;
+            /* Define a proporção com que um item deve encolher, caso seja necessário. */
+            flex-grow: 1;
+            /* Define a proporção com que um item deve crescer, caso seja necessário.  */
+            text-align: center;
+        }
+
+        .recipe-meta-title {
+            font-size: 1.6rem;
+            /* Fonte do h3 */
+        }
+
+        .recipe-footer a {
+            /* Editando a tag a que se encontra dentro desta class */
+            background: var(--color-primary-dark);
+            display: block;
+            color: var(--color-white);
+            text-decoration: none;
+            text-align: center;
+            padding: 1.5rem var(--spacing-gutter-medium);
+            /* Definindo o tamanho do footer */
+            transition: all 300ms ease-in-out;
+            /* Efeito de transição */
+        }
+
+        .recipe-footer a:hover {
+            filter: brightness(2);
+            /* Alterando o brilho da tag a, quando estiver com o mouse em cima */
         }
     </style>
 </head>
