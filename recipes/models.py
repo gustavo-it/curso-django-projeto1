@@ -1,4 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=65)
 
 
 class Recipe(models.Model):
@@ -28,3 +33,11 @@ class Recipe(models.Model):
     Este campo recebe o valor upload_to (que é o caminho para onde a imagem irá ficará salva).
     Ou seja, ficará salvo na pasta recipes > cover > pasta com o nome (ano/mes/dia).
     """
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True)
+    """
+    on_delete=models.SET_NULL -> Quando a categoria for apagada eu estou dizendo para o django colocar como nulo
+    caso a categoria da receita seja apagada. Além disso estou permitindo que a categoria possa
+    receber o valor null.
+    """
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
