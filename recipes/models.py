@@ -37,7 +37,7 @@ class Recipe(models.Model):
     Ou seja, ficará salvo na pasta recipes > cover > pasta com o nome (ano/mes/dia).
     """
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True)
+        Category, on_delete=models.SET_NULL, null=True, blank=True, default=None)
     """
     on_delete=models.SET_NULL -> Quando a categoria for apagada eu estou dizendo para o django colocar como nulo
     caso a categoria da receita seja apagada. Além disso estou permitindo que a categoria possa
