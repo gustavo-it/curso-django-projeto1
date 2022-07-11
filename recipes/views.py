@@ -1,11 +1,18 @@
 from django.shortcuts import render
 from utils.recipes.factory import make_recipe  # importando a função
 
+from .models import Recipe
+
 
 def home(request):
-    return render(request, 'recipes/pages/home.html', context={'recipes': [make_recipe() for _ in range(10)]})
+    recipes = Recipe.objects.all().order_by('-id')
+    return render(request, 'recipes/pages/home.html', context={'recipes': recipes})
     #  Passando o caminho do template, lembre que por padrão o Django identifica a pasta templates
-    #  Estamos passando no contexto a função de teste, executando uma list comprehension que gera 10 receitas
+
+
+def category(request, category_id):
+    recipes = Recipe.objects.filter(category__id=category_id).order_by('-id')
+    return render(request, 'recipes/pages/home.html', context={'recipes': recipes})
 
 
 def recipes(request, id):
