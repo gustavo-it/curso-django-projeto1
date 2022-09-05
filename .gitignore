@@ -1,4 +1,5 @@
 venv
+migrations
 # Django #
 *.log
 *.pot
