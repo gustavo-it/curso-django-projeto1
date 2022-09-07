@@ -182,5 +182,23 @@
             */
             border-color: var(--color-primary);
         }
+
+        .main-content {
+            /* Esta estilização vai servir para quando eu quiser mexer
+            no elemento main e na div. */
+            padding-top: 0;
+
+        }
+
+        .main-content-list {
+            /* Criando a grid */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            /* Fazendo com que os elementos fiquem responsivos. 
+            repeat -> eu quero que ele repita e estou definindo o tamanho mínimo (minmax)
+            de 340px ou 1 fragmento inteiro (1fr) se não couber. */
+            gap: var(--spacing-gutter-medium);
+            /* Adicionando um espaço */
+        }
     </style>
 </head>
