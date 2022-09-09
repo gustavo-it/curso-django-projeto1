@@ -198,7 +198,32 @@
             repeat -> eu quero que ele repita e estou definindo o tamanho mínimo (minmax)
             de 340px ou 1 fragmento inteiro (1fr) se não couber. */
             gap: var(--spacing-gutter-medium);
-            /* Adicionando um espaço */
+            /* Adicionando um espaço entre os elementos */
+        }
+
+        .recipe {
+            background: var(--color-white);
+            box-shadow: -5px 5px 10px rgba(0, 0, 0, .2);
+            /* Definindo a sombra do nosso card */
+            transition: all 300ms ease-in-out;
+            /* Definindo o efeito de transição do card */
+            transform: scale(1);
+            /* Scale define o tamanho do elemento. scale(1) não altera o tamanho do elemento
+            em nosso caso, precisamos para fazer o efeito do elemento crescer quando o mouse passar em cima dele. */
+        }
+
+        .recipe img {
+            max-width: 100%;
+            /* Definindo que a imagem ocupe 100% da div */
+        }
+
+        .recipe-list-item {
+            max-width: 64rem;
+            /* Definindo o tamanho do card de receita */
+        }
+
+        .recipe-list-item:hover {
+            transform: scale(1.02);
         }
     </style>
 </head>
