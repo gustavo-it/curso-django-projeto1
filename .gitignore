@@ -1,4 +1,5 @@
 venv
+.projeto1
 migrations
 # Django #
 *.log
