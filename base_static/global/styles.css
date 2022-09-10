@@ -1,0 +1,321 @@
+:root {
+    --color-primary: #269fe6;
+    --color-primary-hover: #2086c2;
+    --color-primary-dark: #13141f;
+    --color-primary-dark-hover: #212336;
+    --color-primary-light: #d4ecfa;
+    --color-primary-light-hover: #bdd8e7;
+
+    --color-white: #fff;
+    --color-black: #000;
+
+    --color-dark-text: #444;
+    --color-info-light: #cce5ff;
+    --color-debug-light: #cce5ff;
+    --color-success-light: #d4edda;
+    --color-alert-light: #fff3cd;
+    --color-warning-light: #fff3cd;
+    --color-error-light: #f8d7da;
+
+    --color-info-dark: #4d86c4;
+    --color-debug-dark: #4d86c4;
+    --color-success-dark: #4a9c5d;
+    --color-alert-dark: #927f40;
+    --color-warning-dark: #927f40;
+    --color-error-dark: #da525d;
+
+    --color-gray-0: #f9f9f9;
+    --color-gray-1: #e0e0e0;
+    --color-gray-2: #c7c7c7;
+    --color-gray-3: #aeaeae;
+    --color-gray-4: #959595;
+    --color-gray-5: #7d7d7d;
+    --color-gray-6: #646464;
+    --color-gray-7: #4b4b4b;
+    --color-gray-8: #323232;
+    --color-gray-9: #191919;
+
+    --font-primary: sans-serif;
+    --font-headings: 'Roboto Slab', serif;
+
+    --spacing-gutter-medium: 3rem;
+    --spacing-gutter-large: 4rem;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    /* Equivale a 16% */
+    font-family: var(--font-primary);
+    /* tipo da fonte */
+    background: var(--color-gray-1);
+    /* fundo da nossa página */
+    color: var(--color-dark-text);
+    /* Definindo a cor do texto */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-headings);
+}
+
+.container {
+    max-width: 144rem;
+    margin: 0 auto;
+    padding: var(--spacing-gutter-medium);
+}
+
+.main-header-container {
+    background: var(--color-primary-dark);
+}
+
+.main-logo {
+    font-size: 4rem;
+    color: var(--color-white);
+    text-decoration: none;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    /* O tamanho dessa div será do tamanho do conteúdo */
+    margin: 0 auto;
+    /* Alinhando o elemento ao centro */
+}
+
+.main-logo-icon {
+    margin-right: 2rem;
+}
+
+.search-form {
+    border: .2rem solid var(--color-primary-dark);
+    /* Adicionando uma borda */
+    max-width: 64rem;
+    margin: 0 auto;
+    border-radius: .4rem;
+    /* Arredondar os cantos do elemento */
+    position: relative;
+    transition: all 300ms ease-in-out;
+    /* 
+    Fazendo com que a transição do efeito que colocamos caso a área do search
+    esteja em foco, aconteça um pouco mais devagar.
+    */
+}
+
+.search-input,
+.search-button {
+    border: none;
+    background: none;
+    outline: none;
+    /* Remove o 'efeito' quando esta área estiver focada. */
+    padding: 1rem;
+    transition: all 300ms ease-in-out;
+    /* 
+    Fazendo com que a transição do efeito que colocamos caso a área do search
+    esteja em foco, aconteça um pouco mais devagar.
+    */
+}
+
+.search-input {
+    width: 100%;
+    padding-right: 3rem;
+}
+
+.search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.search-button:focus {
+    outline: 1px var(--color-primary);
+    background: rgba(0, 0, 0, .05);
+    /* Exibindo melhor ao usuário quando o botão search estiver selecionado */
+}
+
+.search-form:focus-within {
+    /* Caso o elemento esteja em foco (com o cursor do mouse em cima) 
+       a borda será alterada.
+    */
+    border-color: var(--color-primary);
+    background: var(--color-white);
+}
+
+.search-form:focus-within .search-button {
+    /* Caso o elemento esteja em foco (com o cursor do mouse em cima) 
+       a cor do botão será alterado.
+    */
+    border-color: var(--color-primary);
+}
+
+.main-content {
+    /* Esta estilização vai servir para quando eu quiser mexer
+    no elemento main e na div. */
+    padding-top: 0;
+
+}
+
+.main-content-list {
+    /* Criando a grid */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    /* Fazendo com que os elementos fiquem responsivos. 
+    repeat -> eu quero que ele repita e estou definindo o tamanho mínimo (minmax)
+    de 340px ou 1 fragmento inteiro (1fr) se não couber. */
+    gap: var(--spacing-gutter-medium);
+    /* Adicionando um espaço entre os elementos */
+}
+
+.recipe {
+    /* Recipe principal, pai das outras divs com recipe */
+    background: var(--color-white);
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, .2);
+    /* Definindo a sombra do nosso card */
+    transition: all 300ms ease-in-out;
+    /* Definindo o efeito de transição do card */
+    transform: scale(1);
+    /* Scale define o tamanho do elemento. scale(1) não altera o tamanho do elemento
+    em nosso caso, precisamos para fazer o efeito do elemento crescer quando o mouse passar em cima dele. */
+    border-radius: .4rem;
+    /* Deixando as bordas arredondadas */
+    overflow: hidden;
+    /* Com essa propriedade, tudo que passar do elemento, no caso a div, não será exibido */
+}
+
+.recipe img {
+    max-width: 100%;
+    /* Definindo que a imagem ocupe 100% da div */
+}
+
+.recipe-list-item {
+    max-width: 64rem;
+    /* Definindo o tamanho do card de receita */
+}
+
+.recipe-list-item:hover {
+    transform: scale(1.02);
+    box-shadow: -8px 8px 18px rgba(0, 0, 0, .25);
+}
+
+.recipe-title-container {
+    padding: var(--spacing-gutter-medium);
+    /* Definindo o espaçamento do titulo para os outros elementos */
+    padding-bottom: 2rem;
+    /* Dividindo por 2 o valor da minha variável */
+}
+
+.recipe-author {
+    padding: 0 var(--spacing-gutter-medium);
+    /* não estamos colocando padding em cima e em baixo */
+}
+
+.recipe-content {
+    padding: var(--spacing-gutter-medium);
+    /* Colocando espaço no texto principal do card */
+    padding-top: 2rem;
+}
+
+.recipe-author-item {
+    color: var(--color-gray-4);
+    margin-right: 1rem;
+}
+
+.recipe-author a {
+    color: var(--color-primary);
+    /* Configurando a cor padrão do nosso elemento */
+    transition: all 300ms ease-in-out;
+    /* Efeito de transição */
+    text-decoration: none;
+    /* Removendo o sublinhado */
+}
+
+.recipe-author a:hover {
+    color: var(--color-primary-dark);
+    /* Configurando para alterar a cor assim que o usuário passar o mouse
+    nos links que estiverem dentro desta div. */
+}
+
+.recipe-meta-container {
+    display: flex;
+    /* fazendo com que os elementos fiquem alinhados lado a lado */
+    flex-flow: row wrap;
+    /* Coloca o conteúdo em linha 
+    Caso não caiba, o elemento será jogado para baixo, não deixando em coluna */
+    padding: var(--spacing-gutter-medium);
+    background: var(--color-gray-1);
+}
+
+.recipe-meta {
+    /* Responsável pelos ícones e quantidades de porções e tempo */
+    display: flex;
+    flex-flow: column nowrap;
+    /* deixa os elementos em coluna nowrap = sem quebras de linha */
+    flex-shrink: 1;
+    /* define a proporção com que um item deve encolher caso seja necessário */
+    flex-grow: 1;
+    /* define a proporção com que um item deve crescer caso seja necessário */
+    text-align: center;
+    /* alinhando os elementos ao centro */
+}
+
+.recipe-meta-tile {
+    /* Responsável pela informação preparo e porções */
+    font-size: 1.6rem;
+}
+
+.recipe-footer a {
+    /* Fazendo alterações no ícone do 'ver mais' */
+    background: var(--color-primary-dark);
+    display: block;
+    /* com disply block, podemos utilizar o text-align center. */
+    color: var(--color-white);
+    /* Cor do texto */
+    text-decoration: none;
+    /* Sem o sublinhado do link */
+    text-align: center;
+    padding: 1.5rem var(--spacing-gutter-medium);
+    transition: all 300ms ease-in-out;
+    /* Adicionando o efeito de transição ao botão ver mais */
+}
+
+.recipe-footer a:hover {
+    filter: brightness(2);
+    /* Adicionando um efeito de brilho, quando o usuário passa o mouse por cima do botão */
+}
+
+.main-footer {
+    /* Estilizando o footer */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* com space-between, o primeiro elemento é deslocado para o inicio do eixo principal
+    e o último é deslocado para o final.
+    justify-content, é utilizado para descrever o alinhamento do container flex */
+    background: var(--color-primary-dark);
+    color: var(--color-white);
+    padding: var(--spacing-gutter-large);
+}
+
+.main-footer a {
+    color: var(--color-white);
+    text-decoration: none;
+    transition: all 300ms ease-in-out;
+}
+
+.main-footer a:hover {
+    /* fazendo com que a tag link fique mais escura quando passar o mouse por cima */
+    filter: brightness(.8);
+}
