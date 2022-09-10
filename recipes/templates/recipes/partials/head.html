@@ -206,6 +206,7 @@
         }
 
         .recipe {
+            /* Recipe principal, pai das outras divs com recipe */
             background: var(--color-white);
             box-shadow: -5px 5px 10px rgba(0, 0, 0, .2);
             /* Definindo a sombra do nosso card */
@@ -214,6 +215,10 @@
             transform: scale(1);
             /* Scale define o tamanho do elemento. scale(1) não altera o tamanho do elemento
             em nosso caso, precisamos para fazer o efeito do elemento crescer quando o mouse passar em cima dele. */
+            border-radius: .4rem;
+            /* Deixando as bordas arredondadas */
+            overflow: hidden;
+            /* Com essa propriedade, tudo que passar do elemento, no caso a div, não será exibido */
         }
 
         .recipe img {
@@ -267,6 +272,54 @@
             color: var(--color-primary-dark);
             /* Configurando para alterar a cor assim que o usuário passar o mouse
             nos links que estiverem dentro desta div. */
+        }
+
+        .recipe-meta-container {
+            display: flex;
+            /* fazendo com que os elementos fiquem alinhados lado a lado */
+            flex-flow: row wrap;
+            /* Coloca o conteúdo em linha 
+            Caso não caiba, o elemento será jogado para baixo, não deixando em coluna */
+            padding: var(--spacing-gutter-medium);
+            background: var(--color-gray-1);
+        }
+
+        .recipe-meta {
+            /* Responsável pelos ícones e quantidades de porções e tempo */
+            display: flex;
+            flex-flow: column nowrap;
+            /* deixa os elementos em coluna nowrap = sem quebras de linha */
+            flex-shrink: 1;
+            /* define a proporção com que um item deve encolher caso seja necessário */
+            flex-grow: 1;
+            /* define a proporção com que um item deve crescer caso seja necessário */
+            text-align: center;
+            /* alinhando os elementos ao centro */
+        }
+
+        .recipe-meta-tile {
+            /* Responsável pela informação preparo e porções */
+            font-size: 1.6rem;
+        }
+
+        .recipe-footer a {
+            /* Fazendo alterações no ícone do 'ver mais' */
+            background: var(--color-primary-dark);
+            display: block;
+            /* com disply block, podemos utilizar o text-align center. */
+            color: var(--color-white);
+            /* Cor do texto */
+            text-decoration: none;
+            /* Sem o sublinhado do link */
+            text-align: center;
+            padding: 1.5rem var(--spacing-gutter-medium);
+            transition: all 300ms ease-in-out;
+            /* Adicionando o efeito de transição ao botão ver mais */
+        }
+
+        .recipe-footer a:hover {
+            filter: brightness(2);
+            /* Adicionando um efeito de brilho, quando o usuário passa o mouse por cima do botão */
         }
     </style>
 </head>
