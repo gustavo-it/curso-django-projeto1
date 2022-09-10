@@ -321,5 +321,29 @@
             filter: brightness(2);
             /* Adicionando um efeito de brilho, quando o usuário passa o mouse por cima do botão */
         }
+
+        .main-footer {
+            /* Estilizando o footer */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* com space-between, o primeiro elemento é deslocado para o inicio do eixo principal
+            e o último é deslocado para o final.
+            justify-content, é utilizado para descrever o alinhamento do container flex */
+            background: var(--color-primary-dark);
+            color: var(--color-white);
+            padding: var(--spacing-gutter-large);
+        }
+
+        .main-footer a {
+            color: var(--color-white);
+            text-decoration: none;
+            transition: all 300ms ease-in-out;
+        }
+
+        .main-footer a:hover {
+            /* fazendo com que a tag link fique mais escura quando passar o mouse por cima */
+            filter: brightness(.8);
+        }
     </style>
 </head>
