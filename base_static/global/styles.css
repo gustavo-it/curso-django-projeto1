@@ -314,6 +314,9 @@ h6 {
     /* Removendo os efeitos que aplicamos anteriormente */
 }
 
+.preparation-steps {
+    padding: var(--spacing-gutter-medium);
+}
 
 .main-footer {
     /* Estilizando o footer */
