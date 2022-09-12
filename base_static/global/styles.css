@@ -203,6 +203,8 @@ h6 {
 .recipe-list-item {
     max-width: 64rem;
     /* Definindo o tamanho do card de receita */
+    height: fit-content;
+    /* deixando o tamanho da div seja de acordo com o tamanho do conteúdo.  */
 }
 
 .recipe-list-item:hover {
