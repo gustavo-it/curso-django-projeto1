@@ -296,6 +296,23 @@ h6 {
     /* Adicionando um efeito de brilho, quando o usuário passa o mouse por cima do botão */
 }
 
+.main-content-detail .recipe-list-item {
+    /* estamos sobrescrevendo a estilização do recipe-list-item
+    somente quando ele for filho de uma div main-content-detail */
+    max-width: 84rem;
+    /* Alterando a largura */
+    margin: 0 auto;
+}
+
+.main-content-detail .recipe-list-item:hover {
+    /* Estamos sobrescrevendo o efeito que aplicamos, somente se este for filho
+    de uma div main-content-detail */
+    transform: scale(1);
+    box-shadow: -5px 5px 15px rgba(0, 0, 0, .2);
+    /* Removendo os efeitos que aplicamos anteriormente */
+}
+
+
 .main-footer {
     /* Estilizando o footer */
     display: flex;
