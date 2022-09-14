@@ -11,3 +11,7 @@ class Recipe(models.Model):
     servings_unit = models.Charfield(max_length=65)
     preparation_steps = models.TextField()
     preparation_steps_is_html = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=False)
+    cover = models.ImageField(upload_to="recipes/covers/%Y/%m/%d/")
