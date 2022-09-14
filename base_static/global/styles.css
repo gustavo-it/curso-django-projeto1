@@ -219,6 +219,11 @@ h6 {
     /* Dividindo por 2 o valor da minha variável */
 }
 
+.recipe-title-container a {
+    text-decoration: none;
+    color: var(--color-primary-dark);
+}
+
 .recipe-author {
     padding: 0 var(--spacing-gutter-medium);
     /* não estamos colocando padding em cima e em baixo */
