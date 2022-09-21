@@ -1,6 +1,7 @@
 venv
 .projeto1
 migrations
+.vscode
 # Django #
 *.log
 *.pot
