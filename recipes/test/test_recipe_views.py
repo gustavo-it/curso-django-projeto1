@@ -20,6 +20,7 @@ class RecipeViewsTest(TestCase):
         response = self.client.get(reverse("recipes:home"))
         self.assertIn("Ainda não temos receitas cadastradas",
                       response.content.decode('utf-8'))
+<<<<<<< HEAD
 
     def test_recipe_category_view_function_is_correct(self):
         view = resolve(reverse("recipes:category", kwargs={"category_id": 1}))
@@ -38,3 +39,5 @@ class RecipeViewsTest(TestCase):
         response = self.client.get(
             reverse("recipes:recipe", kwargs={"id": 1000}))
         self.assertEqual(response.status_code, 404)
+=======
+>>>>>>> ad36c2ed258f6d005c2f338b8c0051cf2fc9c6c1
