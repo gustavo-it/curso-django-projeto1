@@ -17,19 +17,20 @@ class RecipeViewsTest(RecipeTestBase):
         response = self.client.get(reverse("recipes:home"))
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
-    def test_recipe_home_template_show_no_recipes_found_if_no_recipes(self):
+    def test_recipe_home_template_shows_no_recipes_found_if_no_recipes(self):
         response = self.client.get(reverse("recipes:home"))
         self.assertIn("Ainda não temos receitas cadastradas",
                       response.content.decode('utf-8'))
 
     def test_recipe_home_template_loads_recipes(self):
+        self.make_recipe()
         response = self.client.get(reverse("recipes:home"))
         content = response.content.decode('utf-8')
         response_context_recipes = response.context['recipes']
-        self.assertIn('Recipe title', content)
+
+        self.assertIn('Recipe Title', content)
         self.assertIn('Recipe Description', content)
         self.assertEqual(len(response_context_recipes), 1)
-        pass
 
     def test_recipe_category_view_function_is_correct(self):
         view = resolve(reverse("recipes:category", kwargs={"category_id": 1}))
