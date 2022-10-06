@@ -32,6 +32,13 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertIn('Recipe Description', content)
         self.assertEqual(len(response_context_recipes), 1)
 
+    def test_recipe_home_template_dont_load_recipes_not_published(self):
+        self.make_recipe(is_published=False)
+        response = self.client.get(reverse("recipes:home"))
+
+        self.assertIn("Ainda não temos receitas cadastradas",
+                      response.content.decode('utf-8'))
+
     def test_recipe_category_view_function_is_correct(self):
         view = resolve(reverse("recipes:category", kwargs={"category_id": 1}))
         self.assertIs(view.func, views.category)
