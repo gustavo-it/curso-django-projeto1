@@ -31,3 +31,7 @@ def recipe(request, id):
         'is_detail_page': True,
         'title': f"{recipe.title} |"
     })
+
+
+def search(request):
+    ...

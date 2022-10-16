@@ -89,7 +89,8 @@ class RecipeViewsTest(RecipeTestBase):
 
     def test_recipe_category_view_returns_404_if_no_recipes_found(self):
         """
-        Verifica se é retornado o erro 404 quando não é encontrado uma categoria.
+        Verifica se é retornado o erro 404 quando
+        não é encontrado uma categoria.
         """
         response = self.client.get(
             reverse("recipes:category", kwargs={"category_id": 1000}))
@@ -97,7 +98,8 @@ class RecipeViewsTest(RecipeTestBase):
 
     def test_recipe_detail_view_function_is_correct(self):
         """
-        Checando se a url de detalhes da receita, está ligada a view da receita.
+        Checando se a url de detalhes da receita, está ligada
+        a view da receita.
         """
         view = resolve(reverse("recipes:recipe", kwargs={"id": 1}))
         self.assertIs(view.func, views.recipe)
@@ -134,3 +136,10 @@ class RecipeViewsTest(RecipeTestBase):
             reverse("recipes:recipe", kwargs={"id": recipe.id}))
 
         self.assertEqual(response.status_code, 404)
+
+    def test_recipe_search_uses_correct_view_function(self):
+        """
+        Testando se a url search, vai usar a view correta.
+        """
+        view = resolve(reverse("recipes:search"))
+        self.assertIs(view.func, views.search)
