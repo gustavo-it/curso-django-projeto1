@@ -23,3 +23,10 @@ class RecipeURLsTest(TestCase):
         """
         url = reverse("recipes:recipe", kwargs={"id": 1})
         self.assertEqual(url, "/recipes/1/")
+
+    def test_recipe_search_url_is_correct(self):
+        """
+        Testando a url search da página principal.
+        """
+        url = reverse("recipes:search")
+        self.assertEqual(url, "/recipes/search/")
