@@ -147,7 +147,15 @@ class RecipeViewsTest(RecipeTestBase):
     def test_recipe_search_loads_correct_template(self):
         """
         Verificando o template se a view está carregando
-        o template correto
+        o template correto.
         """
         response = self.client.get(reverse("recipes:search"))
         self.assertTemplateUsed(response, "recipes/pages/search.html")
+
+    def test_recipe_search_raises_404_if_no_search_term(self):
+        """
+        Testando o erro 404 quando não temos um termo no campo
+        de busca.
+        """
+        response = self.client.get(reverse("recipes:search"))
+        self.assertEqual(response.status_code, 404)
