@@ -159,3 +159,14 @@ class RecipeViewsTest(RecipeTestBase):
         """
         response = self.client.get(reverse("recipes:search"))
         self.assertEqual(response.status_code, 404)
+
+    def test_recipe_search_term_is_on_page_title_and_escaped(self):
+        """
+        Testa se o search_term está no título da página e está escapado.
+        """
+        url = reverse("recipes:search") + "?q=Teste"
+        response = self.client.get(url)
+        self.assertIn(
+            "Search for &#x27;Teste&#x27;",
+            response.content.decode("utf-8")
+        )
