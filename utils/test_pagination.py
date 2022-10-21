@@ -15,6 +15,7 @@ class PaginationTest(TestCase):
         assertEqual --> Compara dois valores. Nesse caso, verifica
         se a lista é igual a pagination.
         """
+        # Currente page = 1
         pagination = make_pagination_range(page_range=list(range(1, 21)),
                                            qtd_paginas=4,
                                            current_page=1)
@@ -23,4 +24,23 @@ class PaginationTest(TestCase):
 
     def test_first_range_is_static_if_current_page_is_less_than_middle_page(
             self):
-        ...
+        # Current page = 2
+        pagination = make_pagination_range(page_range=list(range(1, 21)),
+                                           qtd_paginas=4,
+                                           current_page=2)
+
+        self.assertEqual([1, 2, 3, 4], pagination)
+
+        # Current page = 3
+        pagination = make_pagination_range(page_range=list(range(1, 21)),
+                                           qtd_paginas=4,
+                                           current_page=3)
+
+        self.assertEqual([2, 3, 4, 5], pagination)
+
+        # Current page = 4
+        pagination = make_pagination_range(page_range=list(range(1, 21)),
+                                           qtd_paginas=4,
+                                           current_page=4)
+
+        self.assertEqual([3, 4, 5, 6], pagination)
