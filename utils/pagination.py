@@ -12,12 +12,13 @@ def make_pagination_range(page_range, qtd_paginas, current_page):
         current_page (int): Página que o usuário está.
 
     Returns:
-        lista: Faz um slicing na quantidade total de páginas e nos retorna
-        dois números antes do atual e dois números depois.
+        retorna um dicionário com elementos que podem ser úteis para
+        apresentarmos em nosso template.
     """
     middle_range = math.ceil(qtd_paginas / 2)
     start_range = current_page - middle_range
     stop_range = current_page + middle_range
+    total_pages = len(page_range)
 
     start_range_offset = abs(start_range) if start_range < 0 else 0
 
@@ -25,4 +26,18 @@ def make_pagination_range(page_range, qtd_paginas, current_page):
         start_range = 0
         stop_range += start_range_offset
 
-    return page_range[start_range:stop_range]
+    if stop_range >= total_pages:
+        start_range = start_range - abs(total_pages - stop_range)
+
+    pagination = page_range[start_range:stop_range]
+    return {
+        "pagination": pagination,
+        "page_range": page_range,
+        "qtd_paginas": qtd_paginas,
+        "current_page": current_page,
+        "total_pages": total_pages,
+        "start_range": start_range,
+        "stop_range": stop_range,
+        "first_page_out_of_range": current_page > middle_range,
+        "last_page_out_of_range": stop_range < total_pages
+    }
