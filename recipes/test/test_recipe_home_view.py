@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from django.urls import resolve, reverse
 from recipes import views
 
@@ -59,3 +61,33 @@ class RecipeHomeViewTest(RecipeTestBase):
 
         self.assertIn("Ainda não temos receitas cadastradas",
                       response.content.decode('utf-8'))
+
+    @patch("recipes.views.PER_PAGE", new=3)
+    def test_recipe_home_is_paginated(self):
+        """
+        Criando um teste de paginção para a view home
+        Esta recebendo um patch, onde altera o valor de uma variável externa
+        para um novo valor e depois volta com o valor antigo, isso para não
+        quebrar nosso test.
+        Em seguida fazemos um laço para gerar 9 receitas, onde o author_data
+        espera um dicionário e o slug é único para cada receita.
+        Pegamos o paginator através de context["recipes"], pois estamos
+        envolvendo a nossa queryset com o paginator.
+        na variável paginator pegamos o paginator para ter acesso a alguns
+        elementos.
+        Por último:
+        Verificamos se o número de paáginas em paginação é 3
+        Verificando se na 1°, 2° e 3° página são exibidas de fato 3 receitas.
+        """
+        for i in range(9):
+            kwargs = {"slug": f"r{i}", "author_data": {"username": f"u{i}"}}
+            self.make_recipe(**kwargs)
+
+        response = self.client.get(reverse("recipes:home"))
+        recipes = response.context["recipes"]
+        paginator = recipes.paginator
+
+        self.assertEqual(paginator.num_pages, 3)
+        self.assertEqual(len(paginator.get_page(1)), 3)
+        self.assertEqual(len(paginator.get_page(2)), 3)
+        self.assertEqual(len(paginator.get_page(3)), 3)
