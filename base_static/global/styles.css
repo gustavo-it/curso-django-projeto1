@@ -388,6 +388,11 @@ h6 {
 }
 
 /* Messages */
+.messages-container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: calc(var(--spacing-gutter-medium) / 2);
+}
 
 .message {
     padding: 1rem;
@@ -435,4 +440,10 @@ h6 {
 
 .center {
     text-align: center;
+}
+
+@media (max-width: 600px ) {
+    .main-content-list {
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
 }
