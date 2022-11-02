@@ -12,7 +12,15 @@ class AuthorRegisterFormUnitTest(TestCase):
         ("password2", "Repeat your password"),
         ("email", "Your email"),
     ])
-    def test_first_name_placeholder_is_correct(self, field, placeholder):
+    def test_fields_placeholder(self, field, placeholder):
         form = RegisterForm()
         current_placeholder = form[field].field.widget.attrs["placeholder"]
         self.assertEqual(placeholder, current_placeholder)
+
+    @parameterized.expand([
+        ("email", "The e-mail must be valid.")
+    ])
+    def test_fields_help_text(self, field, needed):
+        form = RegisterForm()
+        current = form[field].field.help_text
+        self.assertEqual(current, needed)
