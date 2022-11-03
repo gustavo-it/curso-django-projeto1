@@ -19,8 +19,8 @@ def strong_password(password):
 
     if not regex.match(password):
         raise ValidationError([
-            "Password must have a least one uppercase letter",
-            "one lowecase letter and one number. The length should be",
+            "Password must have a least one uppercase letter "
+            "one lowecase letter and one number. The length should be "
             "at leats 8 characters."
         ],
                               code="invalid")
@@ -66,8 +66,8 @@ class RegisterForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput(),
         error_messages={"required": "Password must not be empty"},
-        help_text=("Password must have a least one uppercase letter",
-                   "one lowecase letter and one number. The length should be",
+        help_text=("Password must have a least one uppercase letter "
+                   "one lowecase letter and one number. The length should be "
                    "at leats 8 characters."),
         validators=[strong_password],
         label="password")
@@ -93,9 +93,11 @@ class RegisterForm(forms.ModelForm):
         password2 = cleaned_data.get("password2")
 
         if password != password2:
+            password_confirmation_error = ValidationError(
+                "Password and Password2 must be equal", code="invalid")
             raise ValidationError({
-                "password":
-                "Password and password2 must be equal",
-                "password2":
-                "Password and password2 must be equal"
+                "password": password_confirmation_error,
+                "password2": [
+                    password_confirmation_error,
+                ],
             })
