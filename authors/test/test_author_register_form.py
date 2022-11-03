@@ -21,15 +21,24 @@ class AuthorRegisterFormUnitTest(TestCase):
         current_placeholder = form[field].field.widget.attrs["placeholder"]
         self.assertEqual(placeholder, current_placeholder)
 
-    @parameterized.expand([("email", "The e-mail must be valid.")])
+    @parameterized.expand([
+        ("email", "The e-mail must be valid."),
+        ("username",
+         ("Username must have at letters, numbers or one of those "
+          "@.+-_. The length should be between 4 and 150 characters.")),
+        ("password",
+         ("Password must have a least one uppercase letter",
+          "one lowecase letter and one number. The length should be",
+          "at leats 8 characters.")), ("email", "The e-mail must be valid.")
+    ])
     def test_fields_help_text(self, field, needed):
         form = RegisterForm()
         current = form[field].field.help_text
         self.assertEqual(current, needed)
 
     @parameterized.expand([("username", "Username"),
-                           ("first_name", "first_name"),
-                           ("last_name", "last_name"), ("email", "email"),
+                           ("first_name", "first name"),
+                           ("last_name", "last name"), ("email", "email"),
                            ("password", "password"),
                            ("password2", "password2")])
     def test_fields_label(self, field, needed):
@@ -63,3 +72,21 @@ class AuthorRegisterFormIntegrationtEST(DjangoTestCase):
         response = self.client.post(url, data=self.form_data, follow=True)
         self.assertIn(msg, response.content.decode("utf-8"))
         # self.assertIn(msg, response.context["form"].errors.get(field))
+
+    def test_username_field_min_length_should_be_4(self):
+        self.form_data["username"] = "joa"
+        url = reverse("authors:create")
+        response = self.client.post(url, data=self.form_data, follow=True)
+        msg = "Username must have at least 4 characters."
+
+        # self.assertIn(msg, response.content.decode("utf-8"))
+        self.assertIn(msg, response.context["form"].errors.get("username"))
+
+    def test_username_field_max_length_should_be_150(self):
+        self.form_data["username"] = "A" * 151
+        url = reverse("authors:create")
+        response = self.client.post(url, data=self.form_data, follow=True)
+        msg = "Username must have less than 150 characters."
+
+        # self.assertIn(msg, response.content.decode("utf-8"))
+        self.assertIn(msg, response.context["form"].errors.get("username"))
