@@ -7,6 +7,7 @@ from .test_recipe_base import RecipeTestBase
 
 
 class RecipeHomeViewTest(RecipeTestBase):
+
     def test_recipe_home_view_function_is_correct(self):
         """
         Checar se a url home está ligado a view home.
@@ -62,32 +63,29 @@ class RecipeHomeViewTest(RecipeTestBase):
         self.assertIn("Ainda não temos receitas cadastradas",
                       response.content.decode('utf-8'))
 
-    @patch("recipes.views.PER_PAGE", new=3)
     def test_recipe_home_is_paginated(self):
-        """
-        Criando um teste de paginção para a view home
-        Esta recebendo um patch, onde altera o valor de uma variável externa
-        para um novo valor e depois volta com o valor antigo, isso para não
-        quebrar nosso test.
-        Em seguida fazemos um laço para gerar 9 receitas, onde o author_data
-        espera um dicionário e o slug é único para cada receita.
-        Pegamos o paginator através de context["recipes"], pois estamos
-        envolvendo a nossa queryset com o paginator.
-        na variável paginator pegamos o paginator para ter acesso a alguns
-        elementos.
-        Por último:
-        Verificamos se o número de paáginas em paginação é 3
-        Verificando se na 1°, 2° e 3° página são exibidas de fato 3 receitas.
-        """
         for i in range(9):
             kwargs = {"slug": f"r{i}", "author_data": {"username": f"u{i}"}}
             self.make_recipe(**kwargs)
-
-        response = self.client.get(reverse("recipes:home"))
-        recipes = response.context["recipes"]
-        paginator = recipes.paginator
+        with patch('recipes.views.PER_PAGE', new=3):
+            response = self.client.get(reverse("recipes:home"))
+            recipes = response.context["recipes"]
+            paginator = recipes.paginator
 
         self.assertEqual(paginator.num_pages, 3)
         self.assertEqual(len(paginator.get_page(1)), 3)
         self.assertEqual(len(paginator.get_page(2)), 3)
         self.assertEqual(len(paginator.get_page(3)), 3)
+
+    def test_invalid_page_query_uses_page_one(self):
+        for i in range(8):
+            kwargs = {'slug': f'r{i}', 'author_data': {'username': f'u{i}'}}
+            self.make_recipe(**kwargs)
+
+        with patch('recipes.views.PER_PAGE', new=3):
+            response = self.client.get(reverse('recipes:home') + '?page=12A')
+            self.assertEqual(response.context['recipes'].number, 1)
+            response = self.client.get(reverse('recipes:home') + '?page=2')
+            self.assertEqual(response.context['recipes'].number, 2)
+            response = self.client.get(reverse('recipes:home') + '?page=3')
+            self.assertEqual(response.context['recipes'].number, 3)
