@@ -69,7 +69,9 @@ class RegisterForm(forms.ModelForm):
         help_text=("Password must have a least one uppercase letter "
                    "one lowecase letter and one number. The length should be "
                    "at leats 8 characters."),
-        validators=[strong_password],
+        validators=[
+            strong_password,
+        ],
         label="password")
 
     password2 = forms.CharField(
@@ -94,7 +96,7 @@ class RegisterForm(forms.ModelForm):
 
         if password != password2:
             password_confirmation_error = ValidationError(
-                "Password and Password2 must be equal", code="invalid")
+                "Password and assword2 must be equal", code="invalid")
             raise ValidationError({
                 "password": password_confirmation_error,
                 "password2": [
