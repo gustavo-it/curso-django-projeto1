@@ -96,7 +96,7 @@ class RegisterForm(forms.ModelForm):
 
         if password != password2:
             password_confirmation_error = ValidationError(
-                "Password and assword2 must be equal", code="invalid")
+                "Password and Password2 must be equal", code="invalid")
             raise ValidationError({
                 "password": password_confirmation_error,
                 "password2": [
@@ -105,11 +105,13 @@ class RegisterForm(forms.ModelForm):
             })
 
     def clean_email(self):
-        email = self.cleaned_data.get("email", "")
+        email = self.cleaned_data.get('email', '')
         exists = User.objects.filter(email=email).exists()
 
         if exists:
-            raise ValidationError("User e-mail os already in use",
-                                  code="invalid")
+            raise ValidationError(
+                'User e-mail is already in use',
+                code='invalid',
+            )
 
         return email
