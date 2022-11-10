@@ -3,11 +3,18 @@
 
 {% block content %}
 
-    <div class="main-content center container">
-        <h2>Login</h2>
-    </div>
-    
-    {% include "global/partials/messages.html" %}
-    {% include "global/partials/form.html" %}
+<div class="main-content center container">
+    <h2>Login</h2>
+    {% if request.user.is_authenticated %}
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores soluta atque provident nisi minima vitae
+        exercitationem accusamus incidunt. Ducimus dolorum incidunt quod aut debitis delectus perspiciatis dolor dicta
+        fugiat vel!
+        {{ request.user.username }}
+    </p>
+    {% endif %}
+</div>
+
+{% include "global/partials/messages.html" %}
+{% include "global/partials/form.html" %}
 
 {% endblock content %}
