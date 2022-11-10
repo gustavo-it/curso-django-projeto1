@@ -73,6 +73,7 @@ def login_create(request):
 
     return redirect(login_url)
 
+
 @login_required(login_url="authors:login", redirect_field_name="next")
 def logout_view(request):
     logout(request)
