@@ -9,7 +9,9 @@
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores soluta atque provident nisi minima vitae
         exercitationem accusamus incidunt. Ducimus dolorum incidunt quod aut debitis delectus perspiciatis dolor dicta
         fugiat vel!
-        {{ request.user.username }}
+        {{ request.user.username }}.
+        Please,
+        <a href="{% url 'authors:logout' %}">Click here</a> to logout.
     </p>
     {% endif %}
 </div>
