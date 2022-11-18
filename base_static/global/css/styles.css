@@ -437,7 +437,7 @@ h6 {
     border: none;
     background: none;
     cursor: pointer;
-    color: var(--color-primary-dark);
+    color: var(--color-primary);
     font-size: 1.6rem;
 }
 
@@ -491,6 +491,10 @@ h6 {
     background: var(--color-debug-light);
     color: var(--color-debug-dark);
   }
+/* Authors */
+.login-message {
+    margin: 1rem 0;
+}
 
 .center {
     text-align: center;

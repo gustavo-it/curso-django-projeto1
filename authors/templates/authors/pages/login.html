@@ -5,19 +5,7 @@
 
 <div class="main-content center container">
     <h2>Login</h2>
-    {% if request.user.is_authenticated %}
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores soluta atque provident nisi minima vitae
-        exercitationem accusamus incidunt. Ducimus dolorum incidunt quod aut debitis delectus perspiciatis dolor dicta
-        fugiat vel!
-        {{ request.user.username }}.
-        Please,
-        <form class="inline-form" action="{% url 'authors:logout' %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="username" value="{{ request.user.username }}">
-            <button class="plaintext-button" type="submit">click here</button>
-        </form> to logout.
-    </p>
-    {% endif %}
+    {% include 'authors/partials/login_message.html' %}
 </div>
 
 {% include "global/partials/messages.html" %}
