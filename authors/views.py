@@ -66,8 +66,10 @@ def login_create(request):
             login(request, authenticated_user)
         else:
             messages.error(request, "Invalid credentials")
+            return redirect(reverse('authors:login'))
     else:
         messages.error(request, "Invalid username or password")
+        return redirect(reverse('authors:login'))
 
     return redirect(reverse('authors:dashboard'))
 
