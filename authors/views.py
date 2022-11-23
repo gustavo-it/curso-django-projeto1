@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
+
 from recipes.models import Recipe
 
 from .forms import LoginForm, RegisterForm
@@ -107,12 +108,37 @@ def dashboard_recipe_edit(request, id):
     ).first()
 
     form = AuthorsRecipeForm(
-        request.POST or None,
+        data=request.POST or None,
+        files=request.FILES or None,
         instance=recipe
     )
 
     if not recipe:
         raise Http404()
+
+    if form.is_valid():
+        recipe = form.save(commit=False)
+
+        if len(recipe.title) < 5:
+            messages.error(request, 'Seu título é muito curto.')
+            return redirect(reverse('authors:dashboard_recipe_edit',
+                                    args=(id,)))
+
+        if len(recipe.description) < 20:
+            messages.error(
+                request, 'A sua descrição precisa ter, pelo menos, ' +
+                '20 caracteres')
+            return redirect(reverse('authors:dashboard_recipe_edit',
+                                    args=(id,)))
+
+        recipe.author = request.user
+        recipe.preparation_stes_is_html = False
+        recipe.is_published = False
+
+        recipe.save()
+
+        messages.success(request, 'Sua receita foi salva com sucesso!')
+        return redirect(reverse('authors:dashboard_recipe_edit', args=(id,)))
 
     return render(
         request, 'authors/pages/dashboard_recipe.html',
