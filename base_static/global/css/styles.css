@@ -72,6 +72,15 @@ h6 {
     font-family: var(--font-headings);
 }
 
+img {
+    max-width: 100%;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
 .container {
     max-width: 144rem;
     margin: 0 auto;
@@ -405,6 +414,10 @@ h6 {
 
 .errorlist {
     color: var(--color-error-dark);
+}
+
+.form-content img {
+    border-radius: 10px;
 }
 
 .form-content input,
