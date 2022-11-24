@@ -174,7 +174,6 @@ a {
     /* Esta estilização vai servir para quando eu quiser mexer
     no elemento main e na div. */
     padding-top: 0;
-
 }
 
 .main-content-list {
@@ -516,7 +515,7 @@ a {
 }
 
 .authors-dashboard-container {
-    max-width: 64rem;
+    max-width: 100rem;
     text-align: left;
     padding: var(--spacing-gutter-medium);
     margin: 0 auto;
@@ -545,3 +544,36 @@ a {
         grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     }
 }
+
+/* Tables */
+
+table, th, td {
+    /* border: 1px solid; */
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 1px solid white;
+}
+
+th {
+    height: 7rem;
+    padding: 2rem;
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+}
+
+td {
+    text-align: left;
+    padding: 2rem;
+}
+
+tr:hover {
+    background-color: var(--color-gray-2);
+}
+
+/* Dashboard-search */
