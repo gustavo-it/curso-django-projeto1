@@ -1,8 +1,16 @@
 <div class="search-container">
     <div class="container">
+        {% if not user.is_authenticated %}
         <form action="{% url "recipes:search" %}" method="GET" class="search-form">
             <input type="search" class="search-input" name="q" value="{{ search_term }}" required>
             <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
         </form>
+            {% else %}
+            <form action="{% url "authors:dashboard_search" %}" method="GET" class="search-form">
+                <input type="search" class="search-input" name="q" value="{{ search_term }}" required>
+                <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+            </form>
+
+        {% endif %}
     </div>
 </div>
