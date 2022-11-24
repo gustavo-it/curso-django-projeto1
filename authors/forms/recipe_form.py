@@ -17,12 +17,13 @@ class AuthorsRecipeForm(forms.ModelForm):
 
         add_attr(self.fields.get('preparation_steps'), 'class', 'span-2')
         add_attr(self.fields.get('cover'), 'class', 'span-2')
+        add_attr(self.fields.get('category'), 'class', 'span-2')
 
     class Meta:
         model = Recipe
         fields = ('title', 'description', 'preparation_time',
                   'preparation_time_unit', 'servings', 'servings_unit',
-                  'preparation_steps', 'cover')
+                  'preparation_steps', 'category', 'cover')
 
         widgets = {
             'cover':
