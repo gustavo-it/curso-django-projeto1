@@ -9,29 +9,7 @@
 
     <div class="authors-dashboard-container">
         <h3>Your recipes</h3>
-        <table class="table-your-recipes">
-            <thead class="header-table">
-                <th>Title</th>
-                <th>Create</th>
-                <th>Update</th>
-                <th>Category</th>
-            </thead>
-            <tbody class="body-table">
-            {% for recipe in recipes %}
-                        <tr class="line-table">
-                        <td><a href="{% url 'authors:dashboard_recipe_edit' recipe.id %}">{{ recipe.title }}</a></td>
-                        <td>{{ recipe.created_at }}</td>
-                        <td>{{ recipe.update_at }}</td>
-                        <td>{{ recipe.category }}</td>
-                        </tr>
-                {% empty %}
-                <div class="center">
-                    <h3>You do not have recipes, please create one.</h3>
-                </div>
-            {% endfor %}
-        </tbody>
-    </table>
-
+        {% include 'authors/partials/table_dashboard.html' %}
     </div>
 </div>
 
