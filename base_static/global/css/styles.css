@@ -457,6 +457,7 @@ a {
     cursor: pointer;
     color: var(--color-primary);
     font-size: 1.6rem;
+    padding: 0.6rem;
 }
 
 /* Messages */
@@ -576,5 +577,10 @@ tr:hover {
     background-color: var(--color-gray-2);
 }
 
-/* Dashboard-search */
-
+@media(max-width: 50rem) {
+    .table {
+        max-width: 100%;
+        overflow: scroll;
+    }
+    
+}
