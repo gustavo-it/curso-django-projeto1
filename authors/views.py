@@ -164,7 +164,7 @@ def dashboard_recipe_new(request):
     if form.is_valid():
         recipe: Recipe = form.save(commit=False)
 
-        recipe.authors = request.user
+        recipe.author = request.user
         recipe.preparation_steps_is_html = False
         recipe.is_published = False
 
