@@ -577,7 +577,7 @@ tr:hover {
     background-color: var(--color-gray-2);
 }
 
-@media(max-width: 50rem) {
+@media(max-width: 40rem) {
     .table {
         max-width: 100%;
         overflow: scroll;
