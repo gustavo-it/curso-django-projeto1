@@ -6,13 +6,13 @@
 <div class="main-content center container">
     <h2>Dashboard ({{ user }}) </h2>
     {% include 'authors/partials/login_message.html' %}
-
+    {% include 'global/partials/messages.html' %}
     <div class="authors-dashboard-container">
         <h3>Your recipes</h3>
         {% include 'authors/partials/table_dashboard.html' %}
     </div>
 </div>
 
-{% include 'global/partials/messages.html' %}
+
 
 {% endblock content %}

@@ -206,3 +206,19 @@ def dashboard_search(request):
                       'pagination_range': pagination_range,
                       'additional_url_query': f'&q={search_term}'
                   })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_recipe_delete(request, id):
+    recipe = Recipe.objects.filter(is_published=False,
+                                   author=request.user,
+                                   id=id).first()
+
+    if not recipe:
+        messages.error(request,
+                       'This recipe was not found.')
+        raise Http404()
+
+    recipe.delete()
+    messages.success(request, 'Deleted successfully.')
+    return redirect(reverse('authors:dashboard'))

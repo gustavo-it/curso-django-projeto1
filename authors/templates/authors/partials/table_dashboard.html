@@ -4,6 +4,7 @@
         <th>Create</th>
         <th>Update</th>
         <th>Category</th>
+        <th>Delete</th>
     </thead>
     <tbody class="body-table">
         {% for recipe in recipes %}
@@ -12,6 +13,10 @@
                 <td> {{ recipe.created_at }} </td>
                 <td>{{ recipe.update_at }}</td>
                 <td>{{ recipe.category }}</td>
+                <form class="inline-form form-delete" action="{% url 'authors:dashboard_recipe_delete' recipe.id %}" method="POST">
+                    {% csrf_token %}
+                    <td><button class="plaintext-button" type="submit"><i class="fa-duotone"></i>Excluir</button></td>
+                </form>
             </tr>
             {% empty %}
             <h3>Você não cadastrou nenhuma receita com essa descrição/título</h3>
