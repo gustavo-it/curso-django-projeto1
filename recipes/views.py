@@ -3,9 +3,10 @@ import os
 from django.db.models import Q
 from django.http.response import Http404
 from django.shortcuts import get_list_or_404, get_object_or_404, render
-from utils.pagination import make_pagination
+from django.urls import reverse
 
 from recipes.models import Recipe
+from utils.pagination import make_pagination
 
 PER_PAGE = int(os.environ.get("PER_PAGE", 6))
 
@@ -61,7 +62,7 @@ def search(request):
     recipes = Recipe.objects.filter(Q(
         Q(title__icontains=search_term)
         | Q(description__icontains=search_term), ),
-                                    is_published=True).order_by("-id")
+        is_published=True).order_by("-id")
 
     page_object, pagination_range = make_pagination(request, recipes, PER_PAGE)
 
@@ -70,5 +71,5 @@ def search(request):
             "page_title": f"Search for '{search_term}' |",
             "recipes": page_object,
             'pagination_range': pagination_range,
-            'additional_url_query': f"&q={search_term}"
+            'additional_url_query': f"&q={search_term}",
         })
