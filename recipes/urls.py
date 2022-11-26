@@ -5,7 +5,8 @@ from . import views
 app_name = 'recipes'
 
 urlpatterns = [
-    path('', views.home, name='home'),  # Chamando a view home
+    path('', views.RecipeListViewBase.as_view(),
+         name='home'),  # Chamando a view home
     path('recipes/search/', views.search, name='search'),
     path('recipes/category/<int:category_id>/',
          views.category, name='category'),
