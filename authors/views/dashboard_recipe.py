@@ -2,7 +2,6 @@ import os
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
@@ -12,6 +11,7 @@ from recipes.models import Recipe
 from utils.pagination import make_pagination
 
 from ..forms.recipe_form import AuthorsRecipeForm
+from .base_class import BaseClassView
 
 PER_PAGE = int(os.environ.get('PER_PAGE', 6))
 
@@ -20,30 +20,7 @@ PER_PAGE = int(os.environ.get('PER_PAGE', 6))
     login_required(login_url='authors:login', redirect_field_name='next'),
     name='dispatch'
 )
-class DashboardRecipe(View):
-    recipe = None
-
-    def get_recipe(self, id):
-        recipe = None
-
-        if id:
-            recipe = Recipe.objects.filter(
-                is_published=False,
-                author=self.request.user,
-                id=id,
-            ).first()
-
-            if not recipe:
-                raise Http404()
-
-        return recipe
-
-    def render_recipe(self, form):
-        return render(self.request, 'authors/pages/dashboard_recipe.html',
-                      context={
-                          'form': form,
-                      })
-
+class DashboardRecipe(BaseClassView):
     def get(self, request, id):
         recipe = self.get_recipe(id)
         form = AuthorsRecipeForm(instance=recipe)
@@ -60,15 +37,17 @@ class DashboardRecipe(View):
         if form.is_valid():
             recipe = form.save(commit=False)
 
-            recipe.author = request.user
+            recipe.author = self.request.user
             recipe.preparation_steps_is_html = False
             recipe.is_published = False
 
             recipe.save()
 
-            messages.success(request, 'Sua receita foi salva com sucesso!')
+            messages.success(
+                self.request, 'Sua receita foi atualizada com sucesso!')
             return redirect(reverse('authors:dashboard_recipe_edit',
                                     args=(id,)))
+
         return self.render_recipe(form)
 
 
@@ -76,13 +55,10 @@ class DashboardRecipe(View):
     login_required(login_url='authors:login', redirect_field_name='next'),
     name='dispatch'
 )
-class DashboardRecipeNew(View):
+class DashboardRecipeNew(BaseClassView):
     def get(self, request):
         form = AuthorsRecipeForm()
-        return render(self.request, 'authors/pages/dashboard_recipe.html',
-                      context={
-                          'form': form,
-                      })
+        return self.render_recipe(form)
 
     def post(self, request):
         form = AuthorsRecipeForm(
@@ -114,7 +90,7 @@ class DashboardRecipeNew(View):
     login_required(login_url='authors:login', redirect_field_name='next'),
     name='dispatch'
 )
-class DashboardRecipeDelete(DashboardRecipe):
+class DashboardRecipeDelete(BaseClassView):
     def post(self, *args, **kwargs):
         recipe = self.get_recipe(self.request.POST.get('id'))
         recipe.delete()
