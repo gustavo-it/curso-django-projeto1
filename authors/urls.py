@@ -10,7 +10,7 @@ urlpatterns = [
     path('login/', views.login_view, name="login"),
     path('login/create/', views.login_create, name="login_create"),
     path('logout/', views.logout_view, name='logout'),
-    path('dashboard/', views.dashboard_view, name='dashboard'),
+    path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
     path('dashboard/recipe/new',
          views.DashboardRecipeNew.as_view(),
          name='dashboard_recipe_new'),

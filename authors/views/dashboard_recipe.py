@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
@@ -7,8 +9,11 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from recipes.models import Recipe
+from utils.pagination import make_pagination
 
 from ..forms.recipe_form import AuthorsRecipeForm
+
+PER_PAGE = int(os.environ.get('PER_PAGE', 6))
 
 
 @method_decorator(
@@ -115,3 +120,21 @@ class DashboardRecipeDelete(DashboardRecipe):
         recipe.delete()
         messages.success(self.request, 'A receita foi apagada com sucesso!')
         return redirect(reverse('authors:dashboard'))
+
+
+@method_decorator(
+    login_required(login_url='authors:login', redirect_field_name='next'),
+    name='dispatch'
+)
+class DashboardView(View):
+    def get(self, request):
+        recipes = Recipe.objects.filter(is_published=False,
+                                        author=request.user).order_by(
+                                            '-id'
+        )
+        page_object, pagination_range = make_pagination(
+            request, recipes, PER_PAGE)
+        return render(request, 'authors/pages/dashboard.html', context={
+            'recipes': page_object,
+            'pagination_range': pagination_range
+        })
