@@ -1,7 +1,9 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views import View
 
 from recipes.models import Recipe
@@ -9,6 +11,10 @@ from recipes.models import Recipe
 from ..forms.recipe_form import AuthorsRecipeForm
 
 
+@method_decorator(
+    login_required(login_url='authors:login', redirect_field_name='next'),
+    name='dispatch'
+)
 class DashboardRecipe(View):
     recipe = None
 
@@ -61,6 +67,10 @@ class DashboardRecipe(View):
         return self.render_recipe(form)
 
 
+@method_decorator(
+    login_required(login_url='authors:login', redirect_field_name='next'),
+    name='dispatch'
+)
 class DashboardRecipeNew(View):
     def get(self, request):
         form = AuthorsRecipeForm()
