@@ -1,3 +1,3 @@
 # flake8: noqa
-from .base_ListView import RecipeListViewBase
+from .home_view import RecipeListViewBase
 from .fbv import search, category, recipe

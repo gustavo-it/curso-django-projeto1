@@ -1,5 +1,7 @@
-from django.views.generic import ListView
 import os
+
+from django.views.generic import ListView
+
 from recipes.models import Recipe
 from utils.pagination import make_pagination
 
