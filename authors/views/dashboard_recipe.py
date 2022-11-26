@@ -11,6 +11,8 @@ from ..forms.recipe_form import AuthorsRecipeForm
 
 
 class DashboardRecipe(View):
+    recipe = None
+
     def get_recipe(self, id):
         recipe = None
 
@@ -58,3 +60,37 @@ class DashboardRecipe(View):
             return redirect(reverse('authors:dashboard_recipe_edit',
                                     args=(id,)))
         return self.render_recipe(form)
+
+
+class DashboardRecipeNew(View):
+    def get(self, request):
+        form = AuthorsRecipeForm()
+        return render(self.request, 'authors/pages/dashboard_recipe.html',
+                      context={
+                          'form': form,
+                      })
+
+    def post(self, request):
+        form = AuthorsRecipeForm(
+            data=request.POST or None,
+            files=request.FILES or None
+        )
+
+        if form.is_valid():
+            recipe: Recipe = form.save(commit=False)
+
+            recipe.author = request.user
+            recipe.preparation_steps_is_html = False
+            recipe.is_published = False
+
+            recipe.save()
+
+            messages.success(request, 'Sua receita acaba de ser cadastrada. ' +
+                             'Aguarde um administrador aprova-lá')
+            return redirect(reverse('authors:dashboard_recipe_edit',
+                                    args=(recipe.id,)))
+
+        return render(request, 'authors/pages/dashboard_recipe.html', context={
+            'form': form,
+            'form_action': reverse('authors:dashboard_recipe_new')
+        })

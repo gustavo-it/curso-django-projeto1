@@ -12,7 +12,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('dashboard/recipe/new',
-         views.dashboard_recipe_new,
+         views.DashboardRecipeNew.as_view(),
          name='dashboard_recipe_new'),
     path('dashboard/recipe/delete/',
          views.dashboard_recipe_delete,
