@@ -1,4 +1,5 @@
 from django.urls import resolve, reverse
+
 from recipes import views
 
 from .test_recipe_base import RecipeTestBase
@@ -28,7 +29,7 @@ class RecipeCategoryViewTest(RecipeTestBase):
         """
         recipe = self.make_recipe(is_published=False)
         response = self.client.get(
-            reverse("recipes:recipe", kwargs={"id": recipe.category.id}))
+            reverse("recipes:recipe", kwargs={"pk": 12312}))
 
         self.assertEqual(response.status_code, 404)
 

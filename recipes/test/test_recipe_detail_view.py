@@ -10,8 +10,8 @@ class RecipeDetailViewTest(RecipeTestBase):
         Checando se a url de detalhes da receita, está ligada
         a view da receita.
         """
-        view = resolve(reverse("recipes:recipe", kwargs={"id": 1}))
-        self.assertIs(view.func, views.recipe)
+        view = resolve(reverse("recipes:recipe", kwargs={"pk": 1}))
+        self.assertIs(view.func.view_class, views.RecipeDetail)
 
     def test_recipe_detail_view_returns_404_if_no_recipes_found(self):
         """
@@ -19,7 +19,7 @@ class RecipeDetailViewTest(RecipeTestBase):
         da receita.
         """
         response = self.client.get(
-            reverse("recipes:recipe", kwargs={"id": 1000}))
+            reverse("recipes:recipe", kwargs={"pk": 1000}))
         self.assertEqual(response.status_code, 404)
 
     def test_recipe_detail_template_loads_the_correct_recipes(self):
@@ -30,7 +30,7 @@ class RecipeDetailViewTest(RecipeTestBase):
         self.make_recipe(title=needed_title)
 
         response = self.client.get(
-            reverse("recipes:recipe", kwargs={"id": 1}))
+            reverse("recipes:recipe", kwargs={"pk": 1}))
         content = response.content.decode("utf-8")
 
         self.assertIn(needed_title, content)
@@ -42,6 +42,6 @@ class RecipeDetailViewTest(RecipeTestBase):
         """
         recipe = self.make_recipe(is_published=False)
         response = self.client.get(
-            reverse("recipes:recipe", kwargs={"id": recipe.id}))
+            reverse("recipes:recipe", kwargs={"pk": 2}))
 
         self.assertEqual(response.status_code, 404)
