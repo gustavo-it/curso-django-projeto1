@@ -10,7 +10,7 @@ class RecipeSearchViewTest(RecipeTestBase):
         Testando se a url search, vai usar a view correta.
         """
         view = resolve(reverse("recipes:search"))
-        self.assertIs(view.func, views.search)
+        self.assertIs(view.func.view_class, views.RecipeListViewSearch)
 
     def test_recipe_search_loads_correct_template(self):
         """

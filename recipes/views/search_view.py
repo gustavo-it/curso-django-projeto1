@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.http import Http404
 
 from .base_view import RecipeListViewBase
 
@@ -8,6 +9,10 @@ class RecipeListViewSearch(RecipeListViewBase):
 
     def get_queryset(self, *args, **kwargs):
         search_term = self.request.GET.get('q', '').strip()
+
+        if not search_term:
+            raise Http404()
+
         qs = super().get_queryset(*args, **kwargs)
         qs = qs.filter(
             Q(Q(title__icontains=search_term) |

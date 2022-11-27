@@ -1,5 +1,4 @@
 # flake8: noqa
-from .home_view import RecipeListViewBase
-from .category_view import CategoryListViewCategory
+from .category_view import RecipeListViewCategory
+from .home_view import RecipeListViewBase, RecipeListViewHome
 from .search_view import RecipeListViewSearch
-from .fbv import  recipe

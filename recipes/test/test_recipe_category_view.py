@@ -10,7 +10,7 @@ class RecipeCategoryViewTest(RecipeTestBase):
         Verificando se a url category está ligado a view category.
         """
         view = resolve(reverse("recipes:category", kwargs={"category_id": 1}))
-        self.assertIs(view.func, views.category)
+        self.assertIs(view.func.view_class, views.RecipeListViewCategory)
 
     def test_recipe_category_template_loads_recipes(self):
         needed_title = "This is category test"
