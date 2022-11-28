@@ -1,7 +1,7 @@
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 
-from .recipe_detail_view import RecipeDetail
+from .recipe_detail import RecipeDetail
 
 
 class RecipeDetailApi(RecipeDetail):

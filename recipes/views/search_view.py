@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.http import Http404
 
-from .base_view import RecipeListViewBase
+from .base import RecipeListViewBase
 
 
 class RecipeListViewSearch(RecipeListViewBase):

@@ -1,6 +1,6 @@
 import os
 
-from .base_view import RecipeListViewBase
+from .base import RecipeListViewBase
 
 PER_PAGE = int(os.environ.get("PER_PAGE", 6))
 

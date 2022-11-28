@@ -1,4 +1,4 @@
-from .base_view import RecipeListViewBase
+from .base import RecipeListViewBase
 from django.http import JsonResponse
 
 

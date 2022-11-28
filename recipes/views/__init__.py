@@ -1,7 +1,8 @@
 # flake8: noqa
-from .category_view import RecipeListViewCategory
-from .home_view import RecipeListViewBase, RecipeListViewHome
-from .search_view import RecipeListViewSearch
-from .recipe_detail_view import RecipeDetail
+from .base import RecipeListViewBase
+from .category import RecipeListViewCategory
+from .home import RecipeListViewHome
 from .json import RecipeListViewHomeApi
 from .json_detail import RecipeDetailApi
+from .recipe_detail import RecipeDetail
+from .search_view import RecipeListViewSearch
