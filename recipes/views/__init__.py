@@ -4,3 +4,4 @@ from .home_view import RecipeListViewBase, RecipeListViewHome
 from .search_view import RecipeListViewSearch
 from .recipe_detail_view import RecipeDetail
 from .json import RecipeListViewHomeApi
+from .json_detail import RecipeDetailApi
