@@ -7,3 +7,4 @@ from .json_detail import RecipeDetailApi
 from .recipe_detail import RecipeDetail
 from .search_view import RecipeListViewSearch
 from .theory import Theory
+from .tag import RecipeListViewTag
