@@ -584,3 +584,8 @@ tr:hover {
     }
     
 }
+
+/* Menu */
+.hidden-text {
+    display: none;
+}
