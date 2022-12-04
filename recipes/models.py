@@ -61,34 +61,37 @@ class Recipe(models.Model):
         image_pillow = Image.open(image_full_path)
         original_width, original_height = image_pillow.size
 
-        if original_width < new_width:
+        if original_width <= new_width:
             image_pillow.close()
             return
 
         new_height = round((new_width * original_height) / original_width)
 
         new_image = image_pillow.resize((new_width, new_height), Image.LANCZOS)
-
         new_image.save(
             image_full_path,
-            optimeze=True,
-            quality=100,
+            optimize=True,
+            quality=50,
         )
 
     def save(self, *args, **kwargs):
+        # aqui acontece o signal pre save
         if not self.slug:
             slug = f'{slugify(self.title)}'
             while Recipe.objects.filter(slug=slug).exists():
                 slug = slug + '-' + get_random_string(length=4)
             self.slug = slug
 
+        saved = super().save(*args, **kwargs)
+
         if self.cover:
             try:
-                self.resize_image(self.cover, 800)
+                self.resize_image(self.cover, 840)
             except FileNotFoundError:
                 ...
 
-        return super().save(*args, **kwargs)
+        return saved
+        # aqui acontece o signal post save
 
     def clean(self, *args, **kwargs):
         error_messages = defaultdict(list)
