@@ -8,3 +8,4 @@ from .recipe_detail import RecipeDetail
 from .search_view import RecipeListViewSearch
 from .theory import Theory
 from .tag import RecipeListViewTag
+from .api import *
