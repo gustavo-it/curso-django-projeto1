@@ -1,7 +1,6 @@
-from collections import defaultdict
-
 from rest_framework import serializers
 
+from authors.validators import AuthorsRecipeValidator
 from tag.models import Tag
 
 from .models import Recipe
@@ -21,7 +20,9 @@ class RecipeSerializer(serializers.ModelSerializer):
         model = Recipe
         fields = ['id', 'title', 'description',
                   'author', 'category', 'tags', 'public', 'preparation',
-                  'tag_objects', 'tag_links']
+                  'tag_objects', 'tag_links', 'preparation_time',
+                  'preparation_time_unit', 'servings', 'preparation_steps',
+                  'servings_unit', 'preparation_steps', 'cover']
     public = serializers.BooleanField(source='is_published', read_only=True)
     preparation = serializers.SerializerMethodField(read_only=True)
     category = serializers.StringRelatedField(read_only=True)
@@ -40,26 +41,6 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         super_validate = super().validate(attrs)
-        cd = attrs
-
-        _my_errors = defaultdict(list)
-
-        title = cd.get('title')
-        description = cd.get('description')
-
-        if title == description:
-            _my_errors['title'].append('Cannot be equal to description')
-            _my_errors['description'].append('Cannot be equal to tile')
-
-        if _my_errors:
-            raise serializers.ValidationError(_my_errors)
-
+        AuthorsRecipeValidator(
+            data=attrs, ErrorClass=serializers.ValidationError)
         return super_validate
-
-    def validate_title(self, value):
-        title = value
-
-        if len(title) < 5:
-            raise serializers.ValidationError('Must have at least 5 chars.')
-
-        return title
