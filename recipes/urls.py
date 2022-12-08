@@ -19,9 +19,16 @@ urlpatterns = [
     path('recipes/api/v1/<int:pk>/', views.RecipeDetailApi.as_view(),
          name='recipe_api_v1_detail'),
     path('recipes/theory/', views.Theory.as_view(), name='theory'),
-    path('recipes/api/v2/', views.RecipeAPIv2list.as_view(),
+    path('recipes/api/v2/', views.RecipeAPIv2ViewSet.as_view({
+         'get': 'list',
+         'post': 'create',
+         }),
          name='recipes_api_v2'),
-    path('recipes/api/v2/<int:pk>/', views.RecipeAPIv2Detail.as_view(),
+    path('recipes/api/v2/<int:pk>/', views.RecipeAPIv2ViewSet.as_view({
+         'get': 'retrieve',
+         'patch': 'partial_update',
+         'delete': 'destroy',
+         }),
          name='recipes_api_v2_detail'),
     path('recipes/api/v2/tag/<int:pk>/', views.tag_api_detail,
          name='recipes_api_v2_tag'),
