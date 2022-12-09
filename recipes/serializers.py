@@ -25,7 +25,6 @@ class RecipeSerializer(serializers.ModelSerializer):
                   'servings_unit', 'preparation_steps', 'cover']
     public = serializers.BooleanField(source='is_published', read_only=True)
     preparation = serializers.SerializerMethodField(read_only=True)
-    category = serializers.StringRelatedField(read_only=True)
     tag_objects = TagSerializer(
         many=True, source='tags', read_only=True
     )
