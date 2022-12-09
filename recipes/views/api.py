@@ -24,7 +24,7 @@ class RecipeAPIv2ViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, ]
 
     def get_object(self):
-        pk = self.kwargs.get('pk')
+        pk = self.kwargs.get('pk', '')
         obj = get_object_or_404(
             self.get_queryset(), pk=pk)
 
