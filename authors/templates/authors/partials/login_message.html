@@ -4,9 +4,9 @@
 You are logged in with
 {{ request.user.username }}.
 <a href="{% url 'authors:dashboard' %}">See your recipes</a>,
-<a href="{% url 'authors:dashboard_recipe_new' %}">create a new recipe or</a>
+<a href="{% url 'authors:dashboard_recipe_new' %}">create a new recipe</a>
  {% include 'authors/partials/form_logout.html' %}
- <a class="authors-logout-link" href="#"></a>
-to logout.
+ or
+ <a class="authors-logout-link" href="#">to logout.</a>
 </div>
 {% endif %}
