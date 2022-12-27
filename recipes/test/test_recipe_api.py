@@ -21,3 +21,16 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
         qtd_of_loaded_recipes = len(response.data.get('results'))
         # print(response.data)
         self.assertEqual(wanted_number_of_recipes, qtd_of_loaded_recipes)
+
+    def test_recipe_api_list_do_not_show_not_published_recipes(self):
+        recipes = self.make_recipe_in_batch(qtd=2)
+        recipe_not_published = recipes[0]
+        recipe_not_published.is_published = False
+        recipe_not_published.save()
+        api_url = reverse('recipes:recipes-api-list')
+        response = self.client.get(api_url)
+        # print(response.data)
+        self.assertEqual(
+            len(response.data.get('results')),
+            1
+        )
