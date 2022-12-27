@@ -34,3 +34,23 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
             len(response.data.get('results')),
             1
         )
+
+    @patch('recipes.views.api.RecipeAPIv2Pagination.page_size', new=10)
+    def test_recipe_api_list_loads_recipes_by_category_id(self):
+        category_wanted = self.make_category(name='WANTED_CATEGORY')
+        category_not_wanted = self.make_category(name='NOT_WANTED_CATEGORY')
+        recipes = self.make_recipe_in_batch(qtd=10)
+
+        for recipe in recipes:
+            recipe.category = category_wanted
+            recipe.save()
+        recipes[0].category = category_not_wanted
+        recipes[0].save()
+
+        api_url = reverse('recipes:recipes-api-list') + \
+            f'?category_id={category_wanted.id}'
+        response = self.client.get(api_url)
+        self.assertEqual(
+            len(response.data.get('results')),
+            9
+        )
