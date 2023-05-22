@@ -1,0 +1,10 @@
+.mypy_cache
+__pycache__
+.pytest_cache
+.projeto1
+htmlcov
+media
+.coverage*
+db.sqlite3
+.env-example
+.vscode
